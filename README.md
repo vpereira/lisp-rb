@@ -97,7 +97,5 @@ The Mini Lisp REPL currently provides a basic set of features for a Lisp-like la
 
 5. **Macros**: Add support for Lisp macros, which are a powerful metaprogramming feature that allows users to extend the language itself.
 
-6. **Comments**: Implement support for single-line and multi-line comments in the Lisp-like syntax.
-
-7. **Tail call optimization**: Optimize the interpreter to support proper tail calls, which would allow for more efficient recursion in user-defined functions.
+6. **Tail call optimization**: Optimize the interpreter to support proper tail calls, which would allow for more efficient recursion in user-defined functions.
 
