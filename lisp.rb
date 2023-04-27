@@ -4,6 +4,8 @@ require 'readline'
 
 # break down the input code into a list of tokens, to be further processed by `parse`
 def tokenize(code)
+  # Remove comments
+  code = code.gsub(/;.*/, '')
   # make sure '(' and ')' are passed as separate tokens
   code = code.gsub('(', ' ( ').gsub(')', ' ) ')
   tokens = []

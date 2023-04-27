@@ -12,6 +12,18 @@ RSpec.describe 'Lisp interpreter' do
     eval_ast(ast, env)
   end
 
+  describe '#tokenize' do
+    it 'ignores comments starting with ;' do
+      code = <<-CODE
+        ; This is a comment
+        (print "Hello, World!") ; Another comment
+      CODE
+
+      expected_tokens = ['(', 'print', '"Hello, World!"', ')']
+      expect(tokenize(code)).to eq(expected_tokens)
+    end
+  end
+
   context 'Arithmetic operations' do
     it 'adds numbers' do
       expect(eval_code('(+ 3 5)')).to eq(8)
