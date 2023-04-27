@@ -80,6 +80,11 @@ def eval_ast(ast, env)
         body.each { |expr| last_result = eval_ast(expr, env) }
       end
       last_result
+    when :let
+      _, bindings, *body = ast
+      new_env = env.dup
+      bindings.each_slice(2) { |var, val| new_env[var] = eval_ast(val, new_env) }
+      body.map { |expr| eval_ast(expr, new_env) }.last
     else
       func = eval_ast(ast[0], env)
       args = ast[1..].map { |arg| eval_ast(arg, env) }
@@ -104,7 +109,12 @@ def global_env
                              puts print_str
                              print_str.chomp
                            },
-                 :_ => 0
+                 :_ => 0,
+                 :let => lambda { |bindings, *body|
+                           new_env = env.dup
+                           bindings.each_slice(2) { |var, val| new_env[var] = eval_ast(val, new_env) }
+                           body.map { |expr| eval_ast(expr, new_env) }.last
+                         }
                })
   end
 end
